@@ -177,6 +177,7 @@ header {
   position: relative;
   overflow: hidden;
   display: inline-block;
+  padding: 10px;
 }
 
 .file_input {
@@ -190,6 +191,14 @@ header {
 }
 
 .file_input_wrapper input[type="file"] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.file_input_wrapper input[type="submit"] {
   font-size: 100px;
   position: absolute;
   left: 0;
