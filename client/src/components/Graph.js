@@ -8,14 +8,18 @@ export default class Graph extends Component {
     const myChartRef = this.chartRef.current.getContext("2d");
 
     new Chart(myChartRef, {
-      type: "line",
+      type: "bar",
       data: {
         //Bring in data
-        labels: ["Jan", "Feb", "March"],
+        labels: ["Jan", "Feb", "March", "April", "rosie"],
         datasets: [
           {
             label: "Sales",
-            data: [86, 67, 91]
+            data: [200, 300, 500, 100, 600, 1000]
+          },
+          {
+            label: "hero",
+            data: [11, 2, 4]
           }
         ]
       },

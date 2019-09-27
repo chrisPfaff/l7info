@@ -5,7 +5,13 @@ import "./App.css";
 function App() {
   return (
     <div className="App">
-      <header>L7Informatics</header>
+      <header>
+        <img
+          className="header_logo"
+          src="https://www.l7informatics.com/wp-content/uploads/2018/05/logo.png"
+          alt="l7informatics logo"
+        />
+      </header>
       <div className="body">
         <Graph />
       </div>
