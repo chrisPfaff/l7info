@@ -1,8 +1,11 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const port = 8080;
+const multer = require("multer");
 const path = require("path");
+const upload = multer({ dest: "uploads/" });
+
+const port = 8080;
 
 let corsOptions = {
   origin: "*",
@@ -12,8 +15,7 @@ let corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.static(path.join(__dirname, "./client/build")));
 
-app.get("/getFile", (req, res) => {
-  console.log("hello here");
+app.post("/getFile", upload.single("file"), (req, res, next) => {
   res.end();
 });
 
