@@ -14,10 +14,20 @@ class App extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit(e) {
+  async handleSubmit(e) {
     e.preventDefault();
-    console.log(this.fileInput.current.files[0].name);
-    console.log("here submit");
+    const uploadFile = file => {
+      fetch("https://localhost:8082/getFile", {
+        method: "POST",
+        body: file
+      })
+        .then(response => response.json())
+        .then(success => {
+          console.log("success");
+        })
+        .catch(error => console.log(error));
+    };
+    uploadFile(this.fileInput.current.files);
   }
 
   render(props) {
