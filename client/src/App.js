@@ -14,6 +14,10 @@ function App() {
       </header>
       <div className="body">
         <Graph />
+        <div className="file_input_wrapper">
+          <button className="file_input">Upload A File</button>
+          <input type="file" name="fileInput" id="fileInput" />
+        </div>
       </div>
     </div>
   );
