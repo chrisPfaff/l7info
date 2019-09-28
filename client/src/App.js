@@ -12,22 +12,27 @@ class App extends Component {
 
     this.fileInput = React.createRef();
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  async handleSubmit(e) {
+  handleSubmit(e) {
     e.preventDefault();
     const uploadFile = file => {
-      fetch("https://localhost:8082/getFile", {
+      console.log(this.fileInput.current.files);
+      fetch("http://localhost:8082/getFile", {
         method: "POST",
         body: file
       })
-        .then(response => response.json())
         .then(success => {
           console.log("success");
         })
         .catch(error => console.log(error));
     };
     uploadFile(this.fileInput.current.files);
+  }
+
+  handleChange(e) {
+    this.setState({ file: this.fileInput.current.files });
   }
 
   render(props) {
@@ -46,6 +51,7 @@ class App extends Component {
             <div className="file_input_wrapper">
               <button className="file_input">Upload A File</button>
               <input
+                onChange={this.handleChange}
                 ref={this.fileInput}
                 type="file"
                 name="fileInput"
