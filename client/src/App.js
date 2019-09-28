@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import Graph from "./components/Graph.js";
+import axios from "axios";
 import "./App.css";
 
 class App extends Component {
   constructor(props) {
     super();
     this.state = {
-      file: [],
+      file: null,
       fileLoaded: false
     };
 
@@ -17,22 +18,17 @@ class App extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const uploadFile = file => {
-      console.log(this.fileInput.current.files);
-      fetch("http://localhost:8082/getFile", {
-        method: "POST",
-        body: file
-      })
-        .then(success => {
-          console.log("success");
-        })
-        .catch(error => console.log(error));
-    };
-    uploadFile(this.fileInput.current.files);
+    const data = new FormData();
+    data.append("file", this.state.file, this.state.file.name);
+
+    axios.post("/getFile", data).then(res => {
+      console.log("success");
+    });
   }
 
   handleChange(e) {
-    this.setState({ file: this.fileInput.current.files });
+    console.log(e.target.files[0]);
+    this.setState({ file: e.target.files[0] });
   }
 
   render(props) {
