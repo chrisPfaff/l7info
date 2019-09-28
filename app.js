@@ -15,7 +15,9 @@ let corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.static(path.join(__dirname, "./client/build")));
 
-app.post("/getFile", upload.single("file"), (req, res, next) => {
+app.post("/getFile", upload.single("fileInput"), (req, res, next) => {
+  console.log("hey");
+  console.log(req);
   res.end();
 });
 
