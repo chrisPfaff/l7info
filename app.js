@@ -17,7 +17,7 @@ app.use(express.static(path.join(__dirname, "./client/build")));
 
 app.post("/getFile", upload.single("fileInput"), (req, res, next) => {
   console.log("hey");
-  console.log(req);
+  console.log(req.body);
   res.end();
 });
 
