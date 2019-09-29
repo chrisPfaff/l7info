@@ -1,16 +1,18 @@
 import React, { Component } from "react";
 import Graph from "./components/Graph.js";
+import Loading from "./components/Loading.js";
+
 import axios from "axios";
+import { getPopulation } from "./utils/getPopulationData.js";
 import "./App.css";
-import { isNumber } from "util";
 
 class App extends Component {
   constructor(props) {
     super();
     this.state = {
       file: null,
-      fileLoaded: false,
-      fileData: []
+      fileData: [],
+      fileLoaded: false
     };
 
     this.fileInput = React.createRef();
@@ -24,21 +26,10 @@ class App extends Component {
     data.append("file", this.state.file, this.state.file.name);
 
     axios.post("/getFile", data).then(res => {
-      const populations = res.data
-        .split(" ")
-        .map(item => {
-          if (Number(item) !== 0 && !isNaN(Number(item))) {
-            return Number(item.slice(0, 1));
-          }
-        })
-        .filter(item => {
-          if (isNumber(item)) {
-            return item;
-          }
-        });
+      const populations = getPopulation(res.data);
       this.setState({ fileData: populations });
-      console.log(this.state.fileData);
     });
+    this.setState({ fileLoaded: !this.state.fileLoaded });
   }
 
   handleChange(e) {
@@ -57,7 +48,13 @@ class App extends Component {
           />
         </header>
         <div className="body">
-          <Graph />
+          <div className="graph_body">
+            {this.state.fileLoaded ? (
+              <Graph data={this.state.fileData} />
+            ) : (
+              <Loading />
+            )}
+          </div>
           <form onSubmit={this.handleSubmit}>
             <div className="file_input_wrapper">
               <button className="file_input">Upload A File</button>
