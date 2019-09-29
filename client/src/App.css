@@ -205,3 +205,39 @@ header {
   top: 0;
   opacity: 0;
 }
+
+#myChart {
+  background-color: #a29fa8;
+  border-radius: 5px;
+  width: 500px;
+  height: 500px;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  25% {
+    transform: scale(1.2);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  75% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.loading_img {
+  height: 100px;
+  margin-top: 100px;
+  animation: pulse 3s infinite;
+}
+.graph_body {
+  height: 290px;
+  width: 540px;
+}
