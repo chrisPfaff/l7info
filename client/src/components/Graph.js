@@ -15,14 +15,18 @@ export default class Graph extends Component {
   }
 
   populate() {
+    console.log("props", this.props);
+    console.log("props", this.props.data);
     const length = this.props.data.length;
     let populations = hashFunction(this.props.data);
     populations = getBenfordsAvg(populations, length);
+    console.log(populations);
     return populations;
   }
 
   componentDidMount() {
     const populations = this.populate();
+    console.log(populations);
     const myChartRef = this.chartRef.current.getContext("2d");
     new Chart(myChartRef, {
       type: "bar",

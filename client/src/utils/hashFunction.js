@@ -9,9 +9,3 @@ export const hashFunction = data => {
   });
   return hash;
 };
-
-// const avgFunction = obj => {
-//   for (item of obj) {
-//     console.log(obj[item]);
-//   }
-// };

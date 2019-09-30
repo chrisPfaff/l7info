@@ -12,8 +12,7 @@ class App extends Component {
     super();
     this.state = {
       file: null,
-      fileData: [],
-      fileLoaded: false
+      fileData: []
     };
 
     this.fileInput = React.createRef();
@@ -29,11 +28,12 @@ class App extends Component {
     axios.post("/getFile", data).then(res => {
       let populations = getPopulation(res.data);
       this.setState({ fileData: populations });
+      console.log("file data", this.state.fileData);
     });
-    this.setState({ fileLoaded: !this.state.fileLoaded });
   }
 
   handleChange(e) {
+    console.log(e.target.files[0]);
     this.setState({ file: e.target.files[0] });
   }
 
@@ -49,7 +49,7 @@ class App extends Component {
         </header>
         <div className="body">
           <div className="graph_body">
-            {this.state.fileLoaded ? (
+            {this.state.fileData.length > 0 ? (
               <Graph data={this.state.fileData} />
             ) : (
               <Loading />
