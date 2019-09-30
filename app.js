@@ -25,6 +25,8 @@ const run = () => {
 app.post("/getFile", (req, res, next) => {
   const uploadFile = req.files.file;
   res.send(uploadFile.data.toString().replace(/(\r\n|\n|\r|\t)/gm, " "));
+
+  //file upload
   // uploadFile.mv(`${__dirname}/client/public/uploads/${fileName}`);
   // fs.readFile(uploadFile, (error, data) => {
   //   if (error) {

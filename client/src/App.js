@@ -49,7 +49,7 @@ class App extends Component {
         </header>
         <div className="body">
           <div className="graph_body">
-            {this.state.fileData.length ? (
+            {this.state.fileLoaded ? (
               <Graph data={this.state.fileData} />
             ) : (
               <Loading />
