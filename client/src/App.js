@@ -12,7 +12,8 @@ class App extends Component {
     super();
     this.state = {
       file: null,
-      fileData: []
+      fileData: [],
+      fileExt: ""
     };
 
     this.fileInput = React.createRef();
@@ -22,6 +23,9 @@ class App extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    if (this.state.fileExt !== "dms") {
+      alert("Please Choose Correct file");
+    }
     const data = new FormData();
     data.append("file", this.state.file, this.state.file.name);
 
@@ -33,7 +37,7 @@ class App extends Component {
   }
 
   handleChange(e) {
-    console.log(e.target.files[0]);
+    this.setState({ fileExt: e.target.files[0].name.split(".").pop() });
     this.setState({ file: e.target.files[0] });
   }
 
