@@ -7,7 +7,7 @@ export default class Loading extends Component {
         <img
           className="loading_img"
           src="https://www.l7informatics.com/wp-content/uploads/2018/05/icon1.png"
-          alt="loading image"
+          alt="loading logo"
         />
       </div>
     );

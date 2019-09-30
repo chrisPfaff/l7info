@@ -4,6 +4,7 @@ import Loading from "./components/Loading.js";
 
 import axios from "axios";
 import { getPopulation } from "./utils/getPopulationData.js";
+
 import "./App.css";
 
 class App extends Component {
@@ -26,14 +27,13 @@ class App extends Component {
     data.append("file", this.state.file, this.state.file.name);
 
     axios.post("/getFile", data).then(res => {
-      const populations = getPopulation(res.data);
+      let populations = getPopulation(res.data);
       this.setState({ fileData: populations });
     });
     this.setState({ fileLoaded: !this.state.fileLoaded });
   }
 
   handleChange(e) {
-    console.log(e.target.files[0]);
     this.setState({ file: e.target.files[0] });
   }
 
@@ -49,7 +49,7 @@ class App extends Component {
         </header>
         <div className="body">
           <div className="graph_body">
-            {this.state.fileLoaded ? (
+            {this.state.fileData.length ? (
               <Graph data={this.state.fileData} />
             ) : (
               <Loading />

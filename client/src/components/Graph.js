@@ -1,18 +1,29 @@
 import React, { Component } from "react";
 import Chart from "chart.js";
+import { hashFunction } from "../utils/hashFunction.js";
+import { getBenfordsAvg } from "../utils/getBendfordsAvg.js";
+
 import "../App.css";
 
 export default class Graph extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: props.data
+      data: null
     };
     this.chartRef = React.createRef();
   }
+
+  populate() {
+    const length = this.props.data.length;
+    let populations = hashFunction(this.props.data);
+    populations = getBenfordsAvg(populations, length);
+    return populations;
+  }
+
   componentDidMount() {
+    const populations = this.populate();
     const myChartRef = this.chartRef.current.getContext("2d");
-    console.log(this.state.data);
     new Chart(myChartRef, {
       type: "bar",
       data: {
@@ -20,7 +31,17 @@ export default class Graph extends Component {
         datasets: [
           {
             label: "Population Percentage",
-            data: [12, 19, 3, 5, 2, 3, 4, 34, 4],
+            data: [
+              populations["1"],
+              populations["2"],
+              populations["3"],
+              populations["4"],
+              populations["5"],
+              populations["6"],
+              populations["7"],
+              populations["8"],
+              populations["9"]
+            ],
             backgroundColor: [
               "#D53963",
               "#D53963",
